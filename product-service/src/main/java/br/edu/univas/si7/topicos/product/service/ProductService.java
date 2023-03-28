@@ -15,8 +15,12 @@ import br.edu.univas.si7.topicos.product.support.ObjectNotFoundException;
 @Service
 public class ProductService {
 
-	@Autowired
 	private ProductRepository repo;
+	
+	@Autowired
+	public ProductService(ProductRepository repo) {
+		this.repo = repo;
+	}
 
 	public List<ProductDTO> findAll() {
 		return repo.findAll().stream().map(p -> new ProductDTO(p)).collect(Collectors.toList());
