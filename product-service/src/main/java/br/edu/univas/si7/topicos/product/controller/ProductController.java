@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.univas.si7.topicos.product.dto.ProductDTO;
 import br.edu.univas.si7.topicos.product.service.ProductService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/products")
@@ -45,13 +46,13 @@ public class ProductController {
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createProduct(@RequestBody ProductDTO product) {
+	public void createProduct(@RequestBody @Valid ProductDTO product) {
 		service.createProduct(product);
 	}
 
 	@PutMapping("/{code}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateProduct(@RequestBody ProductDTO dto, @PathVariable Integer code) {
+	public void updateProduct(@RequestBody @Valid ProductDTO dto, @PathVariable Integer code) {
 		service.updateProduct(service.toEntity(dto), code);
 	}
 
